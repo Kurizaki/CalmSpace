@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="CalmSpace.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CalmSpace"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="#F0F4F8"
+    Shell.TabBarForegroundColor="#3C6E71"
+    Shell.TabBarTitleColor="#3C6E71"
+    Shell.TabBarUnselectedColor="#90A4AE"
+    Title="CalmSpace">
+
+    <TabBar>
+
+        <Tab Title="Winter" Icon="Icons/TabBar/winter_icon.svg">
+            <ShellContent
+                Title="Winter"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage"
+                Shell.NavBarIsVisible="False" />
+        </Tab>
+        <Tab Title="Spring" Icon="Icons/TabBar/spring_icon.svg">
+            <ShellContent
+                Title="Spring"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage"
+                Shell.NavBarIsVisible="False" />
+        </Tab>
+        <Tab Title="Home" Icon="Icons/TabBar/home_icon.svg">
+            <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage"
+                Shell.NavBarIsVisible="False" />
+        </Tab>
+        <Tab Title="Summer" Icon="Icons/TabBar/summer_icon.svg">
+            <ShellContent
+                Title="Summer"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage"
+                Shell.NavBarIsVisible="False" />
+        </Tab>
+        <Tab Title="Autumn" Icon="Icons/TabBar/autumn_icon.svg">
+            <ShellContent
+                Title="Autumn"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage"
+                Shell.NavBarIsVisible="False" />
+        </Tab>
+    </TabBar>
+</Shell>

@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CalmSpace.MainPage">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#FFFFFF" Offset="0.0" />
+            <GradientStop Color="#B3E5FC" Offset="0.5" />
+            <GradientStop Color="#81D4FA" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="15">
+
+            <Frame
+                BackgroundColor="#FFFFFF"
+                CornerRadius="20"
+                Padding="0"
+                HasShadow="True"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"
+                Margin="0,20,0,10"
+                WidthRequest="280"
+                HeightRequest="40">
+                <Frame.Shadow>
+                    <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3" />
+                </Frame.Shadow>
+                <SearchBar
+                    Placeholder="Search sounds..."
+                    TextChanged="OnSearchBarTextChanged"
+                    SearchButtonPressed="OnSearchButtonPressed"
+                    BackgroundColor="Transparent"
+                    TextColor="Black"
+                    PlaceholderColor="Gray"
+                    FontSize="18"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center"/>
+            </Frame>
+
+            <Frame
+                BackgroundColor="White"
+                CornerRadius="75"
+                WidthRequest="150"
+                HeightRequest="150"
+                HasShadow="True"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Frame.Shadow>
+                    <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3" />
+                </Frame.Shadow>
+                <Frame.Background>
+                    <RadialGradientBrush Radius="1.2">
+                        <GradientStop Color="#FFFFFF" Offset="0.0" />
+                        <GradientStop Color="#B3E5FC" Offset="0.5" />
+                        <GradientStop Color="#81D4FA" Offset="1.0" />
+                    </RadialGradientBrush>
+                </Frame.Background>
+                <Image
+                    Source="Icons/Logo/calmspace_logo.png"
+                    HeightRequest="100"
+                    Aspect="AspectFit"
+                    SemanticProperties.Description="CalmSpace Logo" />
+            </Frame>
+
+            <Label
+                Text="Welcome to CalmSpace!"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="25"
+                FontAttributes="Bold"/>
+
+            <HorizontalStackLayout
+                Spacing="7"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+
+                <Frame
+                    x:Name="IntroductionFrame"
+                    BackgroundColor="#B0BEC5"
+                    CornerRadius="20"
+                    Padding="10"
+                    WidthRequest="150"
+                    HeightRequest="65"
+                    Margin="0,70,0,0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    HasShadow="True">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3"/>
+                    </Frame.Shadow>
+                    <HorizontalStackLayout>
+                        <Image Source="Icons/MainPage/introduction_icon.svg" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
+                        <Label Text="Introduction" VerticalOptions="Center" TextColor="#333333"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnIntroductionClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <Frame
+                    x:Name="SettingsFrame"
+                    BackgroundColor="#CFD8DC"
+                    CornerRadius="20"
+                    Padding="10"
+                    WidthRequest="150"
+                    HeightRequest="65"
+                    Margin="0,70,0,0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    HasShadow="True">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3"/>
+                    </Frame.Shadow>
+                    <HorizontalStackLayout>
+                        <Image Source="Icons/MainPage/settings_icon.svg" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
+                        <Label Text="Settings" VerticalOptions="Center" TextColor="#333333"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSettingsClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout
+                Spacing="7"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+
+                <Frame
+                    x:Name="FavouritesFrame"
+                    BackgroundColor="#ECEFF1"
+                    CornerRadius="20"
+                    Padding="10"
+                    WidthRequest="150"
+                    HeightRequest="65"
+                    Margin="0,-7,0,0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    HasShadow="True">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3"/>
+                    </Frame.Shadow>
+                    <HorizontalStackLayout>
+                        <Image Source="Icons/MainPage/favourite_icon.svg" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
+                        <Label Text="Favourites" VerticalOptions="Center" TextColor="#333333"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnFavouritesClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <Frame
+                    x:Name="ContactFrame"
+                    BackgroundColor="#E0E0E0"
+                    CornerRadius="20"
+                    Padding="10"
+                    WidthRequest="150"
+                    HeightRequest="65"
+                    Margin="0,-7,0,0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    HasShadow="True">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3"/>
+                    </Frame.Shadow>
+                    <HorizontalStackLayout>
+                        <Image Source="Icons/MainPage/contact_icon.svg" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
+                        <Label Text="Contact Us" VerticalOptions="Center" TextColor="#333333"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnContactClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
