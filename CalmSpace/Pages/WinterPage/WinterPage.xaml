@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CalmSpace.Pages.WinterPage.WinterPage"
+             Title="WinterPage">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#E0F7FA" Offset="0.0" />
+            <GradientStop Color="#B2EBF2" Offset="0.5" />
+            <GradientStop Color="#80DEEA" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="15"
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="Center">
+
+            <VerticalStackLayout.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped" />
+                <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped" />
+            </VerticalStackLayout.GestureRecognizers>
+
+            <Label Text="Welcome to&#x0a;Winter!"
+                   FontSize="40"
+                   TextColor="White"
+                   HorizontalTextAlignment="Center"
+                   VerticalOptions="Center"
+                   Margin="0,20,0,10"/>
+
+            <Label
+                Text="Feel the serenity and tranquility of winter."
+                FontSize="18"
+                TextColor="White"
+                HorizontalTextAlignment="Center"
+                VerticalOptions="Center"
+                Margin="0,0,0,20"/>
+
+            <Frame BackgroundColor="#D6F1F3"
+                   CornerRadius="30"
+                   Padding="15"
+                   HasShadow="True"
+                   Margin="0,0,0,20"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center">
+
+                <Grid ColumnSpacing="30"
+                      HorizontalOptions="Center"
+                      VerticalOptions="Center">
+
+                    <Button Grid.Column="0"
+                            ImageSource="Icons/Player/timer_icon.svg"
+                            x:Name="TimerButton"
+                            Clicked="OnTimerButtonClicked"
+                            WidthRequest="50"
+                            HeightRequest="50"
+                            BackgroundColor="#FFFFFF"
+                            CornerRadius="25"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+
+
+                    <Button Grid.Column="1"
+                            ImageSource="Icons/Player/player_icon.svg"
+                        x:Name="PlayPauseButton"
+                            Clicked="OnPlayPauseButtonClicked"
+                            WidthRequest="60"
+                            HeightRequest="60"
+                            BackgroundColor="#FFFFFF"
+                            CornerRadius="30"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+
+                        <Button Grid.Column="2"
+                            ImageSource="Icons/MainPage/favourite_icon.svg"
+                            x:Name="FavoriteButton"
+                            Clicked="OnFavoriteButtonClicked"
+                            WidthRequest="50"
+                            HeightRequest="50"
+                            BackgroundColor="#FFFFFF"
+                            CornerRadius="25"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+
+                </Grid>
+
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

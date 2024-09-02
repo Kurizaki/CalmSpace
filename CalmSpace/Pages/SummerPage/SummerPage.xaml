@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CalmSpace.Pages.SummerPage.SummerPage"
+             Title="SummerPage">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#FFEB3B" Offset="0.0" />
+            <GradientStop Color="#FF9800" Offset="0.5" />
+            <GradientStop Color="#F57C00" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="15">
+
+            <VerticalStackLayout.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped" />
+                <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped" />
+            </VerticalStackLayout.GestureRecognizers>
+
+            <Label Text="Welcome to&#x0a;Summer!"
+                   FontSize="40"
+                   TextColor="White"
+                   HorizontalTextAlignment="Start"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="Start" 
+                   Margin="0,20,0,20"/>
+
+
+            <Label
+                Text="Experience the warmth and brightness of summer."
+                FontSize="18"
+                TextColor="White"
+                HorizontalOptions="Center"
+                Margin="0,10,0,20"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

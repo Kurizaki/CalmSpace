@@ -4,48 +4,52 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:CalmSpace"
+    xmlns:mainPage="clr-namespace:CalmSpace.Pages.MainPage"
+    xmlns:summerPage="clr-namespace:CalmSpace.Pages.SummerPage"
+    xmlns:winterPage="clr-namespace:CalmSpace.Pages.WinterPage"
+    xmlns:springPage="clr-namespace:CalmSpace.Pages.SpringPage"
+    xmlns:autumnPage="clr-namespace:CalmSpace.Pages.AutumnPage"
     Shell.FlyoutBehavior="Disabled"
-    Shell.TabBarBackgroundColor="#F0F4F8"
     Shell.TabBarForegroundColor="#3C6E71"
     Shell.TabBarTitleColor="#3C6E71"
     Shell.TabBarUnselectedColor="#90A4AE"
+    Shell.TabBarBackgroundColor="#FFFFFF"
     Title="CalmSpace">
 
-    <TabBar>
-
+    <TabBar x:Name="MainTabBar">
         <Tab Title="Winter" Icon="Icons/TabBar/winter_icon.svg">
             <ShellContent
                 Title="Winter"
-                ContentTemplate="{DataTemplate local:MainPage}"
-                Route="MainPage"
+                ContentTemplate="{DataTemplate winterPage:WinterPage}"
+                Route="WinterPage"
                 Shell.NavBarIsVisible="False" />
         </Tab>
         <Tab Title="Spring" Icon="Icons/TabBar/spring_icon.svg">
             <ShellContent
                 Title="Spring"
-                ContentTemplate="{DataTemplate local:MainPage}"
-                Route="MainPage"
+                ContentTemplate="{DataTemplate springPage:SpringPage}"
+                Route="SpringPage"
                 Shell.NavBarIsVisible="False" />
         </Tab>
         <Tab Title="Home" Icon="Icons/TabBar/home_icon.svg">
             <ShellContent
                 Title="Home"
-                ContentTemplate="{DataTemplate local:MainPage}"
+                ContentTemplate="{DataTemplate mainPage:MainPage}"
                 Route="MainPage"
                 Shell.NavBarIsVisible="False" />
         </Tab>
         <Tab Title="Summer" Icon="Icons/TabBar/summer_icon.svg">
             <ShellContent
                 Title="Summer"
-                ContentTemplate="{DataTemplate local:MainPage}"
-                Route="MainPage"
+                ContentTemplate="{DataTemplate summerPage:SummerPage}"
+                Route="SummerPage"
                 Shell.NavBarIsVisible="False" />
         </Tab>
         <Tab Title="Autumn" Icon="Icons/TabBar/autumn_icon.svg">
             <ShellContent
                 Title="Autumn"
-                ContentTemplate="{DataTemplate local:MainPage}"
-                Route="MainPage"
+                ContentTemplate="{DataTemplate autumnPage:AutumnPage}"
+                Route="AutumnPage"
                 Shell.NavBarIsVisible="False" />
         </Tab>
     </TabBar>
