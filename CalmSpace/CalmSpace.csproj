@@ -43,6 +43,7 @@
 	<MauiImage Include="Icons\Logo\*.png" />
 	<MauiImage Include="Icons\MainPage\*.svg" />
     <MauiImage Include="Icons\Player\*.svg" />
+	<MauiAsset Include="Resources/Sounds/Winter/*.mp3" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -67,6 +68,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Plugin.Maui.Audio" Version="3.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -82,6 +84,13 @@
 	  <MauiXaml Update="Pages\WinterPage\WinterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Resources\Sounds\Autumn\" />
+	  <Folder Include="Resources\Sounds\Spring\" />
+	  <Folder Include="Resources\Sounds\Winter\" />
+	  <Folder Include="Resources\Sounds\Summer\" />
 	</ItemGroup>
 
 </Project>
