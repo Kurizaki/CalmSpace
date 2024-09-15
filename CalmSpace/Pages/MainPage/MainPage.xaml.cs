@@ -1,4 +1,5 @@
 ﻿using CalmSpace.Helpers;
+using CalmSpace.Views;
 
 namespace CalmSpace.Pages.MainPage
 {
@@ -7,6 +8,16 @@ namespace CalmSpace.Pages.MainPage
         public MainPage()
         {
             InitializeComponent();
+            MainPage.PermissionRequest();
+        }
+        private static async void PermissionRequest()
+        {
+            if (await Permissions.RequestAsync<Permissions.StorageRead>() != PermissionStatus.Granted)
+            {
+            }
+            else if (await Permissions.RequestAsync<Permissions.StorageWrite>() != PermissionStatus.Granted)
+            {
+            }
         }
         private void OnSwiped(object sender, SwipedEventArgs e)
         {
@@ -25,18 +36,22 @@ namespace CalmSpace.Pages.MainPage
 
         private void OnIntroductionClicked(object sender, EventArgs e)
         {
+            IntroductionView.IsVisible = true;
         }
 
         private void OnSettingsClicked(object sender, EventArgs e)
         {
+            SettingsView.IsVisible = true;
         }
 
         private void OnFavouritesClicked(object sender, EventArgs e)
         {
+            FavouritesView.IsVisible = true;
         }
 
         private void OnContactClicked(object sender, EventArgs e)
         {
+            ContactUsView.IsVisible = true;
         }
     }
 }

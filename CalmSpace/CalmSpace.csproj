@@ -44,6 +44,9 @@
 	<MauiImage Include="Icons\MainPage\*.svg" />
     <MauiImage Include="Icons\Player\*.svg" />
 	<MauiAsset Include="Resources/Sounds/Winter/*.mp3" />
+	<MauiAsset Include="Resources/Sounds/Summer/*.mp3" />
+	<MauiAsset Include="Resources/Sounds/Spring/*.mp3" />
+	<MauiAsset Include="Resources/Sounds/Autumn/*.mp3" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -84,6 +87,21 @@
 	  <MauiXaml Update="Pages\WinterPage\WinterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\ContactUsView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\FavouritesView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\IntroductionView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SettingsView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\TimerView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -91,6 +109,12 @@
 	  <Folder Include="Resources\Sounds\Spring\" />
 	  <Folder Include="Resources\Sounds\Winter\" />
 	  <Folder Include="Resources\Sounds\Summer\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\TimerView.xaml.cs">
+	    <DependentUpon>TimerView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

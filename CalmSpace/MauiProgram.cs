@@ -1,4 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CalmSpace.Pages.AutumnPage;
+using CalmSpace.Pages.SpringPage;
+using CalmSpace.Pages.SummerPage;
+using CalmSpace.Pages.WinterPage;
+using Microsoft.Extensions.Logging;
+using Plugin.Maui.Audio;
 
 namespace CalmSpace
 {
@@ -18,7 +23,11 @@ namespace CalmSpace
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-
+            builder.Services.AddSingleton(AudioManager.Current);
+            builder.Services.AddTransient<WinterPage>();
+            builder.Services.AddTransient<SummerPage>();
+            builder.Services.AddTransient<SpringPage>();
+            builder.Services.AddTransient<AutumnPage>();
             return builder.Build();
         }
     }

@@ -1,24 +1,24 @@
-using System.Collections.ObjectModel;
-using System.IO;
-using CalmSpace;
 using CalmSpace.Helpers;
-using CalmSpace.Pages.WinterPage;
 using Microsoft.Maui.Controls;
 using Plugin.Maui.Audio;
+
 namespace CalmSpace.Pages.WinterPage;
-
-
-
-public partial class WinterPage: ContentPage
+public partial class WinterPage : ContentPage
 {
     private readonly SoundManager _soundManager;
+    private readonly FavoriteManager _favoriteManager;
 
-    public WinterPage()
+    public WinterPage(IAudioManager audioManager)
     {
         InitializeComponent();
-        _soundManager = new SoundManager();
+        _soundManager = new SoundManager(audioManager);
         LoadWinterSounds();
         BindingContext = _soundManager;
+
+        _soundManager.OnPlayStateChanged += UpdatePlayPauseButtonIcon;
+        _soundManager.OnRemainingTimeUpdated += UpdateRemainingTime;
+
+        TimerViewControl.TimerSet += OnTimerSet;
     }
 
     private async void LoadWinterSounds()
@@ -35,14 +35,75 @@ public partial class WinterPage: ContentPage
         await _soundManager.LoadSoundsAsync("Winter", winterSoundMappings);
     }
 
-    private void OnSoundButtonClicked(object sender, EventArgs e)
+    private void OnTimerButtonClicked(object sender, EventArgs e)
+    {
+        TimerViewControl.UpdateRemainingTime(_soundManager.RemainingSeconds);
+        TimerViewControl.ShowTimerView();
+    }
+
+    private void OnTimerSet(int totalSeconds)
+    {
+        if (!_soundManager.IsPlaying)
+        {
+            if (_soundManager.SoundItems.Count > 0)
+            {
+                _soundManager.PlaySoundAsync(_soundManager.SoundItems[0].SoundFilePath);
+            }
+        }
+
+        _soundManager.StartTimer(totalSeconds);
+        TimerViewControl.IsVisible = false;
+    }
+
+    private void UpdateRemainingTime(int remainingSeconds)
+    {
+        TimerViewControl.UpdateRemainingTime(remainingSeconds);
+    }
+
+    private async void OnSoundButtonClicked(object sender, EventArgs e)
     {
         var button = sender as Button;
-        var soundItem = button.BindingContext as SoundItem;
+        var soundItem = button?.BindingContext as SoundItem;
 
-        if (soundItem != null)
+        if (soundItem != null && !string.IsNullOrEmpty(soundItem.SoundFilePath))
         {
-            _soundManager.PlaySound(soundItem.SoundFilePath);
+            await _soundManager.PlaySoundAsync(soundItem.SoundFilePath);
+        }
+    }
+
+    private void OnPlayPauseButtonClicked(object sender, EventArgs e)
+    {
+        if (_soundManager.IsPlaying)
+        {
+            _soundManager.PauseSound();
+        }
+        else
+        {
+            if (_soundManager.SoundItems.Count > 0 && _soundManager._currentSoundFilePath != null)
+            {
+                _soundManager.ResumeSoundAsync();
+            }
+        }
+    }
+
+    private void UpdatePlayPauseButtonIcon(bool isPlaying)
+    {
+        PlayPauseButton.ImageSource = isPlaying ? "Icons/Player/stop_icon.svg" : "Icons/Player/play_icon.svg";
+    }
+
+    private async void OnSkipButtonClicked(object sender, EventArgs e)
+    {
+        if (_soundManager.SoundItems.Count > 0)
+        {
+            await _soundManager.PlayNextSoundAsync();
+        }
+    }
+
+    private async void OnPreviousButtonClicked(object sender, EventArgs e)
+    {
+        if (_soundManager.SoundItems.Count > 0)
+        {
+            await _soundManager.PlayPreviousSoundAsync();
         }
     }
 
@@ -52,18 +113,24 @@ public partial class WinterPage: ContentPage
         SwipeHandler.OnSwiped(shell, e);
     }
 
-    private void OnPlayPauseButtonClicked(object sender, EventArgs e)
+    private async void OnFavoriteButtonClicked(object sender, EventArgs e)
     {
-        // Implement play/pause functionality
-    }
+        var button = sender as Button;
+        var filePath = button?.BindingContext as string;
 
-    private void OnTimerButtonClicked(object sender, EventArgs e)
-    {
-        // Implement timer functionality
-    }
-
-    private void OnFavoriteButtonClicked(object sender, EventArgs e)
-    {
-        // Implement favorite functionality
+        if (!string.IsNullOrEmpty(filePath))
+        {
+            if (_favoriteManager.IsFavorite(filePath))
+            {
+                await _favoriteManager.RemoveFavoriteAsync(filePath);
+                await DisplayAlert("Favorite Removed", $"{filePath} has been removed from favorites.", "OK");
+            }
+            else
+            {
+                await _favoriteManager.AddFavoriteAsync(filePath);
+                await DisplayAlert("Favorite Added", $"{filePath} has been added to favorites.", "OK");
+            }
+        }
     }
 }
+

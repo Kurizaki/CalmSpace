@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CalmSpace.Views.TimerView"
+             IsVisible="False"
+             BackgroundColor="#80000000">
+
+    <ContentView.Content>
+        <Frame BackgroundColor="White"
+               Padding="30"
+               CornerRadius="20"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               WidthRequest="320"
+               HeightRequest="420"
+               HasShadow="True"
+               BorderColor="#80DEEA">
+
+            <StackLayout Padding="10" Spacing="20">
+
+                <Label Text="Set Timer"
+                       FontSize="24"
+                       TextColor="#00796B"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="Center"
+                             Spacing="20">
+
+                    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+                        <Label Text="Hours"
+                               FontSize="16"
+                               TextColor="#004D40"
+                               HorizontalOptions="Center" />
+                        <Picker x:Name="HoursPicker"
+                                Title="Select Hours"
+                                FontSize="16"
+                                TextColor="Black">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:Int32}">
+                                    <x:Int32>0</x:Int32>
+                                    <x:Int32>1</x:Int32>
+                                    <x:Int32>2</x:Int32>
+                                    <x:Int32>3</x:Int32>
+                                    <x:Int32>4</x:Int32>
+                                    <x:Int32>5</x:Int32>
+                                    <x:Int32>6</x:Int32>
+                                    <x:Int32>7</x:Int32>
+                                    <x:Int32>8</x:Int32>
+                                    <x:Int32>9</x:Int32>
+                                    <x:Int32>10</x:Int32>
+                                    <x:Int32>11</x:Int32>
+                                    <x:Int32>12</x:Int32>
+                                    <x:Int32>13</x:Int32>
+                                    <x:Int32>14</x:Int32>
+                                    <x:Int32>15</x:Int32>
+                                    <x:Int32>16</x:Int32>
+                                    <x:Int32>17</x:Int32>
+                                    <x:Int32>18</x:Int32>
+                                    <x:Int32>19</x:Int32>
+                                    <x:Int32>20</x:Int32>
+                                    <x:Int32>21</x:Int32>
+                                    <x:Int32>22</x:Int32>
+                                    <x:Int32>23</x:Int32>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </StackLayout>
+
+                    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+                        <Label Text="Minutes"
+                               FontSize="16"
+                               TextColor="#004D40"
+                               HorizontalOptions="Center" />
+                        <Picker x:Name="MinutesPicker"
+                                Title="Select Minutes"
+                                FontSize="16"
+                                TextColor="Black">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:Int32}">
+                                    <x:Int32>0</x:Int32>
+                                    <x:Int32>5</x:Int32>
+                                    <x:Int32>10</x:Int32>
+                                    <x:Int32>15</x:Int32>
+                                    <x:Int32>20</x:Int32>
+                                    <x:Int32>25</x:Int32>
+                                    <x:Int32>30</x:Int32>
+                                    <x:Int32>35</x:Int32>
+                                    <x:Int32>40</x:Int32>
+                                    <x:Int32>45</x:Int32>
+                                    <x:Int32>50</x:Int32>
+                                    <x:Int32>55</x:Int32>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </StackLayout>
+
+                </StackLayout>
+
+                <Button Text="Set Timer"
+                        Command="{Binding SetTimerCommand}"
+                        TextColor="White"
+                        FontSize="18"
+                        BackgroundColor="#00796B"
+                        CornerRadius="20"
+                        Padding="15,10"
+                        WidthRequest="180"
+                        HorizontalOptions="Center"/>
+
+                <Button Text="Close"
+                        Clicked="OnCloseButtonClicked"
+                        TextColor="White"
+                        FontSize="18"
+                        BackgroundColor="#D32F2F"
+                        CornerRadius="20"
+                        Padding="15,10"
+                        WidthRequest="180"
+                        HorizontalOptions="Center"/>
+
+                <Label x:Name="RemainingTimeLabel"
+                       Text="Time remaining: 00:00:00"
+                       FontSize="16"
+                       TextColor="#D32F2F"
+                       HorizontalOptions="Center"
+                       IsVisible="False" />
+
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>
