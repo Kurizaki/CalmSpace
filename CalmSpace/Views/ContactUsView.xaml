@@ -2,11 +2,34 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CalmSpace.Views.ContactUsView">
-    <Frame Padding="20" CornerRadius="15" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="300" HeightRequest="400">
-        <StackLayout>
-            <Label Text="Contact Us" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center"/>
-            <Label Text="Email: support@calmspace.com" HorizontalOptions="Center"/>
-            <Button Text="Close" Clicked="CloseContactUs"/>
-        </StackLayout>
+    <Frame Padding="25" CornerRadius="20" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="350" HeightRequest="500" HasShadow="True">
+        <VerticalStackLayout Spacing="20">
+            <Label Text="Get in Touch" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#333" />
+
+            <Frame BackgroundColor="#F5F5F5" CornerRadius="15" Padding="15" HasShadow="False">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="We’d love to hear from you!" FontSize="18" FontAttributes="Bold" TextColor="#555" HorizontalOptions="Center" />
+
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                        <Image Source="Icons/Contact/email_icon.svg" WidthRequest="20" HeightRequest="20" />
+                        <Label Text="Email: support@calmspace.com" FontSize="16" TextColor="#333" />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                        <Image Source="Icons/Contact/phone_icon.svg" WidthRequest="20" HeightRequest="20" />
+                        <Label Text="Phone: +1 234 567 890" FontSize="16" TextColor="#333" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Label Text="Follow us on" FontSize="16" FontAttributes="Italic" TextColor="#555" HorizontalOptions="Center" />
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                <ImageButton Source="Icons/Contact/facebook_icon.svg" WidthRequest="40" HeightRequest="40" Clicked="OnFacebookClicked" />
+                <ImageButton Source="Icons/Contact/twitter_icon.svg" WidthRequest="40" HeightRequest="40" Clicked="OnTwitterClicked" />
+                <ImageButton Source="Icons/Contact/instagram_icon.svg" WidthRequest="40" HeightRequest="40" Clicked="OnInstagramClicked" />
+            </HorizontalStackLayout>
+
+            <Button Text="Close" Clicked="CloseContactUs" BackgroundColor="#81D4FA" TextColor="White" CornerRadius="20" WidthRequest="150" HorizontalOptions="Center" />
+        </VerticalStackLayout>
     </Frame>
 </ContentView>

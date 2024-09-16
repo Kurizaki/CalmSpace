@@ -8,6 +8,7 @@ public partial class AutumnPage : ContentPage
 {
     private readonly SoundManager _soundManager;
     private readonly FavoriteManager _favoriteManager;
+    private ShakeDetector _shakeDetector;
 
     public AutumnPage(IAudioManager audioManager)
     {
@@ -19,7 +20,22 @@ public partial class AutumnPage : ContentPage
         _soundManager.OnPlayStateChanged += UpdatePlayPauseButtonIcon;
         _soundManager.OnRemainingTimeUpdated += UpdateRemainingTime;
 
-        TimerViewControl.TimerSet += OnTimerSet; // Subscribe to the timer event
+        TimerViewControl.TimerSet += OnTimerSet;
+        _shakeDetector = new ShakeDetector(OnShakeDetected);
+        _shakeDetector.Start();
+    }
+    private async void OnShakeDetected()
+    {
+        if (_soundManager.SoundItems.Count > 0)
+        {
+            await _soundManager.PlayNextSoundAsync();
+        }
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        _shakeDetector.Stop();
     }
 
     private async void LoadAutumnSounds()

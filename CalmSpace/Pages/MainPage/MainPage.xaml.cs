@@ -18,6 +18,9 @@ namespace CalmSpace.Pages.MainPage
             else if (await Permissions.RequestAsync<Permissions.StorageWrite>() != PermissionStatus.Granted)
             {
             }
+            else if (await Permissions.RequestAsync<Permissions.Sensors>() != PermissionStatus.Granted)
+            {
+            }
         }
         private void OnSwiped(object sender, SwipedEventArgs e)
         {

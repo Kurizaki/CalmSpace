@@ -8,6 +8,7 @@ public partial class SpringPage : ContentPage
 {
     private readonly SoundManager _soundManager;
     private readonly FavoriteManager _favoriteManager;
+    private ShakeDetector _shakeDetector;
 
     public SpringPage(IAudioManager audioManager)
     {
@@ -20,6 +21,22 @@ public partial class SpringPage : ContentPage
         _soundManager.OnRemainingTimeUpdated += UpdateRemainingTime;
 
         TimerViewControl.TimerSet += OnTimerSet;
+        _shakeDetector = new ShakeDetector(OnShakeDetected);
+        _shakeDetector.Start();
+    }
+
+    private async void OnShakeDetected()
+    {
+        if (_soundManager.SoundItems.Count > 0)
+        {
+            await _soundManager.PlayNextSoundAsync();
+        }
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        _shakeDetector.Stop();
     }
 
     private async void LoadSpringSounds()

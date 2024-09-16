@@ -2,12 +2,32 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CalmSpace.Views.SettingsView">
-    <Frame Padding="20" CornerRadius="15" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="300" HeightRequest="400">
-        <StackLayout>
-            <Label Text="Settings" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center"/>
-            <Switch x:Name="SoundToggle" IsToggled="True"/>
-            <Label Text="Enable Sound" HorizontalOptions="Center"/>
-            <Button Text="Close" Clicked="CloseSettings"/>
-        </StackLayout>
+    <Frame Padding="25" CornerRadius="20" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="350" HeightRequest="500" HasShadow="True">
+        <VerticalStackLayout Spacing="25">
+            <Label Text="Settings" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#333" />
+
+            <Frame BackgroundColor="#F5F5F5" CornerRadius="15" Padding="15" HasShadow="False">
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Label Text="Enable Sound" FontSize="18" VerticalOptions="Center" TextColor="#333" />
+                    <Switch x:Name="SoundToggle" IsToggled="True" HorizontalOptions="EndAndExpand" />
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="#F5F5F5" CornerRadius="15" Padding="15" HasShadow="False">
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Label Text="Dark Mode" FontSize="18" VerticalOptions="Center" TextColor="#333" />
+                    <Switch x:Name="DarkModeToggle" IsToggled="{Binding IsDarkModeEnabled}" HorizontalOptions="EndAndExpand" />
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="#F5F5F5" CornerRadius="15" Padding="15" HasShadow="False">
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Label Text="Enable Notifications" FontSize="18" VerticalOptions="Center" TextColor="#333" />
+                    <Switch x:Name="NotificationToggle" IsToggled="{Binding AreNotificationsEnabled}" HorizontalOptions="EndAndExpand" />
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Button Text="Close" Clicked="CloseSettings" BackgroundColor="#81D4FA" TextColor="White" CornerRadius="20" WidthRequest="150" HorizontalOptions="Center" />
+        </VerticalStackLayout>
     </Frame>
 </ContentView>

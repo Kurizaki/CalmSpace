@@ -7,10 +7,12 @@ public partial class WinterPage : ContentPage
 {
     private readonly SoundManager _soundManager;
     private readonly FavoriteManager _favoriteManager;
+    private ShakeDetector _shakeDetector;
 
     public WinterPage(IAudioManager audioManager)
     {
         InitializeComponent();
+        _favoriteManager = new FavoriteManager();
         _soundManager = new SoundManager(audioManager);
         LoadWinterSounds();
         BindingContext = _soundManager;
@@ -19,6 +21,21 @@ public partial class WinterPage : ContentPage
         _soundManager.OnRemainingTimeUpdated += UpdateRemainingTime;
 
         TimerViewControl.TimerSet += OnTimerSet;
+        _shakeDetector = new ShakeDetector(OnShakeDetected);
+        _shakeDetector.Start();
+    }
+    private async void OnShakeDetected()
+    {
+        if (_soundManager.SoundItems.Count > 0)
+        {
+            await _soundManager.PlayNextSoundAsync();
+        }
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        _shakeDetector.Stop();
     }
 
     private async void LoadWinterSounds()

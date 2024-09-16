@@ -2,11 +2,18 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CalmSpace.Views.IntroductionView">
-    <Frame Padding="20" CornerRadius="15" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="300" HeightRequest="400">
-        <StackLayout>
-            <Label Text="Introduction" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center"/>
-            <Label Text="Welcome to CalmSpace, your personal relaxation app." HorizontalOptions="Center"/>
-            <Button Text="Close" Clicked="CloseIntroduction"/>
-        </StackLayout>
+    <Frame Padding="25" CornerRadius="20" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="350" HeightRequest="500" HasShadow="True">
+        <VerticalStackLayout Spacing="20">
+            <Label Text="Welcome to CalmSpace" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#333" />
+
+            <Frame BackgroundColor="#F5F5F5" CornerRadius="15" Padding="20">
+                <Label Text="CalmSpace is your personal sanctuary, offering relaxing sounds, mindfulness exercises, and stress relief techniques. Our goal is to help you find peace and tranquility in your everyday life." 
+                       FontSize="16" TextColor="#555" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Frame>
+
+            <Image Source="Icons/Introduction/relax_icon.svg" WidthRequest="100" HeightRequest="100" HorizontalOptions="Center" Aspect="AspectFit"/>
+
+            <Button Text="Get Started" Clicked="CloseIntroduction" BackgroundColor="#81D4FA" TextColor="White" CornerRadius="20" WidthRequest="150" HorizontalOptions="Center"/>
+        </VerticalStackLayout>
     </Frame>
 </ContentView>
