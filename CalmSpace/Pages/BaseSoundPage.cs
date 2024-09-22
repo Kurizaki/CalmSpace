@@ -2,6 +2,7 @@ using CalmSpace.Helpers;
 using CalmSpace.Views;
 using Microsoft.Maui.Controls;
 using Plugin.Maui.Audio;
+using System.Diagnostics;
 
 namespace CalmSpace.Pages
 {
@@ -25,7 +26,10 @@ namespace CalmSpace.Pages
             _shakeDetector = new ShakeDetector(OnShakeDetected);
             _shakeDetector.Start();
         }
-
+        protected void SetTimerViewControl(TimerView timerView)
+        {
+            TimerViewControl = timerView;
+        }
         protected void SetPlayPauseButton(Button button)
         {
             PlayPauseButton = button;
@@ -55,9 +59,17 @@ namespace CalmSpace.Pages
 
         protected void OnTimerButtonClicked(object sender, EventArgs e)
         {
-            TimerViewControl.UpdateRemainingTime(_soundManager.RemainingSeconds);
-            TimerViewControl.ShowTimerView();
+            if (TimerViewControl != null)
+            {
+                TimerViewControl.UpdateRemainingTime(_soundManager.RemainingSeconds);
+                TimerViewControl.ShowTimerView();
+            }
+            else
+            {
+                Debug.WriteLine("TimerViewControl is null");
+            }
         }
+
 
         protected void OnTimerSet(int totalSeconds)
         {

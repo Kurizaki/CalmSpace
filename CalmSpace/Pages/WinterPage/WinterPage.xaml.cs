@@ -1,4 +1,6 @@
 using Plugin.Maui.Audio;
+using CalmSpace.Views;
+using System.Diagnostics;
 
 namespace CalmSpace.Pages.WinterPage
 {
@@ -7,9 +9,21 @@ namespace CalmSpace.Pages.WinterPage
         public WinterPage(IAudioManager audioManager) : base(audioManager)
         {
             InitializeComponent();
+
+            var timerView = this.FindByName<TimerView>("TimerViewControl");
+            if (timerView != null)
+            {
+                SetTimerViewControl(timerView);
+            }
+            else
+            {
+                Debug.WriteLine("TimerViewControl is null after initialization.");
+            }
+
             SetPlayPauseButton(this.FindByName<Button>("PlayPauseButton"));
             LoadSounds();
         }
+
 
         protected override async void LoadSounds()
         {
