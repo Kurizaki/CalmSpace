@@ -11,7 +11,6 @@
                     <DataTemplate>
                         <Frame BackgroundColor="#F5F5F5" CornerRadius="10" Padding="10" Margin="0,5">
                             <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                                <Image Source="{Binding ImageSource}" WidthRequest="40" HeightRequest="40" />
                                 <Label Text="{Binding SoundName}" FontSize="18" VerticalOptions="Center" TextColor="#333" />
                                 <Button Text="Remove" BackgroundColor="#FF5252" TextColor="White" CornerRadius="10" Clicked="OnRemoveFavourite" HorizontalOptions="EndAndExpand" />
                             </HorizontalStackLayout>

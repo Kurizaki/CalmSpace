@@ -22,12 +22,6 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <Label Text="Follow us on" FontSize="16" FontAttributes="Italic" TextColor="#555" HorizontalOptions="Center" />
-            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-                <ImageButton Source="Icons/Contact/facebook_icon.svg" WidthRequest="40" HeightRequest="40" Clicked="OnFacebookClicked" />
-                <ImageButton Source="Icons/Contact/twitter_icon.svg" WidthRequest="40" HeightRequest="40" Clicked="OnTwitterClicked" />
-                <ImageButton Source="Icons/Contact/instagram_icon.svg" WidthRequest="40" HeightRequest="40" Clicked="OnInstagramClicked" />
-            </HorizontalStackLayout>
 
             <Button Text="Close" Clicked="CloseContactUs" BackgroundColor="#81D4FA" TextColor="White" CornerRadius="20" WidthRequest="150" HorizontalOptions="Center" />
         </VerticalStackLayout>

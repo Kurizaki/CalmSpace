@@ -1,15 +1,19 @@
-﻿using CalmSpace.Helpers;
-using CalmSpace.Views;
+﻿using CalmSpace.Views;
+using CalmSpace.Helpers;
+using Microsoft.Maui.Controls;
 
 namespace CalmSpace.Pages.MainPage
 {
     public partial class MainPage : ContentPage
     {
+        private FavouritesView _favouritesView;
+
         public MainPage()
         {
             InitializeComponent();
-            MainPage.PermissionRequest();
+            PermissionRequest();
         }
+
         private static async void PermissionRequest()
         {
             if (await Permissions.RequestAsync<Permissions.StorageRead>() != PermissionStatus.Granted)
@@ -22,19 +26,12 @@ namespace CalmSpace.Pages.MainPage
             {
             }
         }
+
         private void OnSwiped(object sender, SwipedEventArgs e)
         {
             var shell = (AppShell)Application.Current.MainPage;
+
             SwipeHandler.OnSwiped(shell, e);
-        }
-
-        private void OnSearchBarTextChanged(object sender, TextChangedEventArgs e)
-        {
-            string searchText = e.NewTextValue;
-        }
-
-        private void OnSearchButtonPressed(object sender, EventArgs e)
-        {
         }
 
         private void OnIntroductionClicked(object sender, EventArgs e)
@@ -49,7 +46,26 @@ namespace CalmSpace.Pages.MainPage
 
         private void OnFavouritesClicked(object sender, EventArgs e)
         {
-            FavouritesView.IsVisible = true;
+            if (_favouritesView != null)
+            {
+                ContentLayout.Children.Remove(_favouritesView);
+                _favouritesView = null;
+            }
+
+            _favouritesView = new FavouritesView();
+            _favouritesView.CloseFavouritesAction = CloseFavouritesView;
+            ContentLayout.Children.Add(_favouritesView);
+
+            _favouritesView.IsVisible = true;
+        }
+
+        private void CloseFavouritesView()
+        {
+            if (_favouritesView != null)
+            {
+                ContentLayout.Children.Remove(_favouritesView);
+                _favouritesView = null;
+            }
         }
 
         private void OnContactClicked(object sender, EventArgs e)

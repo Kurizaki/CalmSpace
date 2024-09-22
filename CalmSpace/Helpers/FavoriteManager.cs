@@ -1,80 +1,81 @@
 ﻿using System.Text.Json;
+using Microsoft.Maui.Storage;
 
-namespace CalmSpace.Helpers;
-
-public class FavoriteManager
+namespace CalmSpace.Helpers
 {
-    private readonly string _filePath;
-    private List<string> _favorites; // Store the file paths of favorite sounds
-
-    public FavoriteManager()
+    public class FavoriteManager
     {
-        _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "favorites.json");
-        _favorites = new List<string>();
-        LoadFavorites();
-    }
+        private const string FavoritesKey = "favoriteSounds";
+        private List<string> _favorites;
 
-    // Load favorites from the file when the app starts
-    private void LoadFavorites()
-    {
-        if (File.Exists(_filePath))
+        public FavoriteManager()
         {
-            try
+            _favorites = new List<string>();
+            LoadFavorites();
+        }
+
+        private void LoadFavorites()
+        {
+            var json = Preferences.Get(FavoritesKey, string.Empty);
+
+            if (!string.IsNullOrEmpty(json))
             {
-                var json = File.ReadAllText(_filePath);
-                _favorites = JsonSerializer.Deserialize<List<string>>(json) ?? new List<string>();
+                try
+                {
+                    _favorites = JsonSerializer.Deserialize<List<string>>(json) ?? new List<string>();
+                    Console.WriteLine($"Loaded {_favorites.Count} favorites from preferences.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error loading favorites: {ex.Message}");
+                    _favorites = new List<string>();
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Error loading favorites: {ex.Message}");
                 _favorites = new List<string>();
             }
         }
-    }
 
-    // Save favorites to the file
-    private async Task SaveFavoritesAsync()
-    {
-        try
+        public async Task SaveFavoritesAsync()
         {
-            var json = JsonSerializer.Serialize(_favorites);
-            await File.WriteAllTextAsync(_filePath, json);
+            try
+            {
+                var json = JsonSerializer.Serialize(_favorites);
+                Preferences.Set(FavoritesKey, json);
+                Console.WriteLine("Favorites saved successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving favorites: {ex.Message}");
+            }
         }
-        catch (Exception ex)
+
+        public async Task AddFavoriteAsync(string soundFilePath)
         {
-            Console.WriteLine($"Error saving favorites: {ex.Message}");
+            if (!_favorites.Contains(soundFilePath))
+            {
+                _favorites.Add(soundFilePath);
+                await SaveFavoritesAsync();
+            }
         }
-    }
 
-    // Add a sound to the favorites
-    public async Task AddFavoriteAsync(string soundFilePath)
-    {
-        if (!_favorites.Contains(soundFilePath))
+        public async Task RemoveFavoriteAsync(string soundFilePath)
         {
-            _favorites.Add(soundFilePath);
-            await SaveFavoritesAsync();
+            if (_favorites.Remove(soundFilePath))
+            {
+                await SaveFavoritesAsync();
+            }
         }
-    }
 
-    // Remove a sound from the favorites
-    public async Task RemoveFavoriteAsync(string soundFilePath)
-    {
-        if (_favorites.Contains(soundFilePath))
+        public bool IsFavorite(string soundFilePath)
         {
-            _favorites.Remove(soundFilePath);
-            await SaveFavoritesAsync();
+            return _favorites.Contains(soundFilePath);
         }
-    }
 
-    // Check if a sound is favorited
-    public bool IsFavorite(string soundFilePath)
-    {
-        return _favorites.Contains(soundFilePath);
-    }
-
-    // Get all favorite sounds
-    public List<string> GetFavorites()
-    {
-        return _favorites;
+        public List<string> GetFavorites()
+        {
+            return _favorites;
+        }
     }
 }

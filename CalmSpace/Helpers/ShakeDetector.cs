@@ -2,7 +2,7 @@
 using Microsoft.Maui.Devices.Sensors;
 using System.Timers;
 
-public class ShakeDetector
+public class ShakeDetector : IDisposable
 {
     private const double ShakeThreshold = 2.0;
     private readonly Action _onShakeDetected;

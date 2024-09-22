@@ -3,70 +3,67 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
+using CalmSpace.Helpers;
 
-namespace CalmSpace.Views;
-
-public partial class TimerView : ContentView
+namespace CalmSpace.Views
 {
-    public ICommand SetTimerCommand { get; set; }
-
-    private int _totalSeconds;
-    private int _remainingSeconds;
-    private bool _timerRunning;
-
-    public event Action<int>? TimerSet;
-
-    public TimerView()
+    public partial class TimerView : ContentView
     {
-        InitializeComponent();
-        SetTimerCommand = new Command(SetTimer);
-        BindingContext = this;
-    }
+        public ICommand SetTimerCommand { get; set; }
+        private readonly TimerManager _TimerManager;
 
-    private void SetTimer()
-    {
-        Debug.WriteLine("Set Timer button clicked");
+        public event Action<int>? TimerSet;
 
-        int hours = HoursPicker.SelectedIndex > -1 ? (int)HoursPicker.SelectedItem : 0;
-        int minutes = MinutesPicker.SelectedIndex > -1 ? (int)MinutesPicker.SelectedItem : 0;
-
-        _totalSeconds = (hours * 3600) + (minutes * 60);
-        _remainingSeconds = _totalSeconds;
-
-        if (_totalSeconds > 0)
+        public TimerView()
         {
-            _timerRunning = true;
-            TimerSet?.Invoke(_totalSeconds);
-            UpdateRemainingTime(_remainingSeconds);
+            InitializeComponent();
+            _TimerManager = new TimerManager();
+            _TimerManager.OnRemainingTimeUpdated += UpdateRemainingTime;
+            SetTimerCommand = new Command(SetTimer);
+            BindingContext = this;
+        }
+
+        private void SetTimer()
+        {
+            Debug.WriteLine("Set Timer button clicked");
+
+            int hours = HoursPicker.SelectedIndex > -1 ? (int)HoursPicker.SelectedItem : 0;
+            int minutes = MinutesPicker.SelectedIndex > -1 ? (int)MinutesPicker.SelectedItem : 0;
+
+            int totalSeconds = (hours * 3600) + (minutes * 60);
+
+            if (totalSeconds > 0)
+            {
+                TimerSet?.Invoke(totalSeconds);
+                _TimerManager.StartTimer(totalSeconds);
+                IsVisible = false;
+            }
+            else
+            {
+                Debug.WriteLine("No time set, totalSeconds is 0");
+            }
+        }
+
+        public void UpdateRemainingTime(int remainingSeconds)
+        {
+            var timeSpan = TimeSpan.FromSeconds(remainingSeconds);
+            RemainingTimeLabel.Text = $"Time remaining: {timeSpan:hh\\:mm\\:ss}";
+            RemainingTimeLabel.IsVisible = _TimerManager.IsRunning && remainingSeconds > 0;
+        }
+
+        public void ShowTimerView()
+        {
+            if (_TimerManager.IsRunning && _TimerManager.RemainingSeconds > 0)
+            {
+                UpdateRemainingTime(_TimerManager.RemainingSeconds);
+            }
+
+            IsVisible = true;
+        }
+
+        private void OnCloseButtonClicked(object sender, EventArgs e)
+        {
             IsVisible = false;
         }
-        else
-        {
-            Debug.WriteLine("No time set, totalSeconds is 0");
-        }
-    }
-
-    public void UpdateRemainingTime(int remainingSeconds)
-    {
-        _remainingSeconds = remainingSeconds;
-
-        var timeSpan = TimeSpan.FromSeconds(_remainingSeconds);
-        RemainingTimeLabel.Text = $"Time remaining: {timeSpan:hh\\:mm\\:ss}";
-        RemainingTimeLabel.IsVisible = _timerRunning && _remainingSeconds > 0;
-    }
-
-    public void ShowTimerView()
-    {
-        if (_timerRunning && _remainingSeconds > 0)
-        {
-            UpdateRemainingTime(_remainingSeconds);
-        }
-
-        IsVisible = true;
-    }
-
-    private void OnCloseButtonClicked(object sender, EventArgs e)
-    {
-        IsVisible = false;
     }
 }

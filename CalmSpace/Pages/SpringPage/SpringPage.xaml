@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:CalmSpace.Views"
-             x:Class="CalmSpace.Pages.SpringPage.SpringPage"
-             Title="SpringPage">
+<local:BasicSoundPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:local="clr-namespace:CalmSpace.Pages"
+                      x:Class="CalmSpace.Pages.SpringPage.SpringPage"
+                      xmlns:views="clr-namespace:CalmSpace.Views">
 
-    <ContentPage.Background>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#C8E6C9" Offset="0.0" />
-            <GradientStop Color="#A5D6A7" Offset="0.5" />
-            <GradientStop Color="#81C784" Offset="1.0" />
-        </LinearGradientBrush>
-    </ContentPage.Background>
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#C8E6C9" Offset="0.0" />
+                <GradientStop Color="#A5D6A7" Offset="0.5" />
+                <GradientStop Color="#81C784" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
 
         <ContentView>
-
             <ContentView.GestureRecognizers>
                 <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped" />
                 <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped" />
@@ -53,18 +52,21 @@
                           HorizontalOptions="Center"
                           VerticalOptions="Center">
 
-                        <Button Grid.Column="2"
-                                ImageSource="Icons/Player/play_icon.svg"
-                                x:Name="PlayPauseButton"
-                                Clicked="OnPlayPauseButtonClicked"
-                                WidthRequest="50"
-                                HeightRequest="50"
-                                BackgroundColor="Transparent"
-                                CornerRadius="37"
-                                FontAttributes="Bold"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Center"
-                                Padding="0" />
+                        <Button x:Name="PlayPauseButton"
+                            ImageSource="Icons/Player/play_icon.svg"
+                            Clicked="OnPlayPauseButtonClicked"
+                            WidthRequest="50"
+                            HeightRequest="50"
+                            BackgroundColor="Transparent"
+                            CornerRadius="37"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Padding="0" />
+
+
+
+
 
                         <Button Grid.Column="2"
                                 ImageSource="Icons/Player/return_icon.svg"
@@ -112,7 +114,7 @@
                                 Margin="180,0,0,0"
                                 ImageSource="Icons/MainPage/favourite_icon.svg"
                                 x:Name="FavButton"
-                                Clicked="OnPlayPauseButtonClicked"
+                                Clicked="OnFavoriteButtonClicked"
                                 WidthRequest="20"
                                 HeightRequest="20"
                                 BackgroundColor="Transparent"
@@ -173,7 +175,7 @@
 
         </ContentView>
 
-        <local:TimerView x:Name="TimerViewControl" IsVisible="False" />
+        <views:TimerView x:Name="TimerViewControl" IsVisible="False" />
 
     </Grid>
-</ContentPage>
+</local:BasicSoundPage>
