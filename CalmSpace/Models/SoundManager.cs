@@ -1,7 +1,7 @@
 ﻿using Plugin.Maui.Audio;
 using System.Collections.ObjectModel;
 
-namespace CalmSpace.Helpers
+namespace CalmSpace.Models
 {
     public class SoundManager
     {

@@ -1,6 +1,6 @@
 using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
-using CalmSpace.Helpers;
+using CalmSpace.Models;
 using System;
 
 namespace CalmSpace.Views

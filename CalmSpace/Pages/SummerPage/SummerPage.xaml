@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<local:BasicSoundPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                      xmlns:local="clr-namespace:CalmSpace.Pages"
-                      x:Class="CalmSpace.Pages.SummerPage.SummerPage"
-                      xmlns:views="clr-namespace:CalmSpace.Views">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CalmSpace.Pages.SummerPage"
+             xmlns:viewmodels="clr-namespace:CalmSpace.ViewModels"
+             xmlns:views="clr-namespace:CalmSpace.Views"
+             x:Class="CalmSpace.Pages.SummerPage.SummerPage">
 
     <Grid>
         <Grid.Background>
@@ -16,8 +17,8 @@
 
         <ContentView>
             <ContentView.GestureRecognizers>
-                <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped" />
-                <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped" />
+                <SwipeGestureRecognizer Direction="Left" Command="{Binding SwipeLeftCommand}" />
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding SwipeRightCommand}" />
             </ContentView.GestureRecognizers>
 
             <VerticalStackLayout Padding="30,0"
@@ -54,7 +55,7 @@
 
                         <Button x:Name="PlayPauseButton"
                             ImageSource="Icons/Player/play_icon.svg"
-                            Clicked="OnPlayPauseButtonClicked"
+                            Command="{Binding PlayPauseCommand}"
                             WidthRequest="50"
                             HeightRequest="50"
                             BackgroundColor="Transparent"
@@ -64,15 +65,10 @@
                             VerticalOptions="Center"
                             Padding="0" />
 
-
-
-
-
                         <Button Grid.Column="2"
                                 ImageSource="Icons/Player/return_icon.svg"
-                                x:Name="SkipButton"
+                                Command="{Binding SkipCommand}"
                                 Margin="100,0,0,0"
-                                Clicked="OnSkipButtonClicked"
                                 WidthRequest="30"
                                 HeightRequest="30"
                                 BackgroundColor="Transparent"
@@ -84,9 +80,8 @@
 
                         <Button Grid.Column="2"
                                 ImageSource="Icons/Player/skip_icon.svg"
-                                x:Name="PreviousButton"
+                                Command="{Binding PreviousCommand}"
                                 Margin="0,0,100,0"
-                                Clicked="OnPreviousButtonClicked"
                                 WidthRequest="30"
                                 HeightRequest="30"
                                 BackgroundColor="Transparent"
@@ -99,8 +94,7 @@
                         <Button Grid.Column="2"
                                 Margin="0,0,180,0"
                                 ImageSource="Icons/Player/timer_icon.svg"
-                                x:Name="TimerButton"
-                                Clicked="OnTimerButtonClicked"
+                                Command="{Binding TimerCommand}"
                                 WidthRequest="20"
                                 HeightRequest="20"
                                 BackgroundColor="Transparent"
@@ -113,8 +107,7 @@
                         <Button Grid.Column="2"
                                 Margin="180,0,0,0"
                                 ImageSource="Icons/MainPage/favourite_icon.svg"
-                                x:Name="FavButton"
-                                Clicked="OnFavoriteButtonClicked"
+                                Command="{Binding FavoriteCommand}"
                                 WidthRequest="20"
                                 HeightRequest="20"
                                 BackgroundColor="Transparent"
@@ -151,7 +144,7 @@
                                                     FontSize="16"
                                                     TextColor="Black"
                                                     BackgroundColor="Transparent"
-                                                    Clicked="OnSoundButtonClicked"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BaseSoundViewModel}}, Path=PlayPauseCommand}"
                                                     HorizontalOptions="StartAndExpand"
                                                     VerticalOptions="Center" />
 
@@ -159,7 +152,7 @@
                                                     BackgroundColor="Transparent"
                                                     WidthRequest="40"
                                                     HeightRequest="40"
-                                                    Clicked="OnFavoriteButtonClicked"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BaseSoundViewModel}}, Path=FavoriteCommand}"
                                                     HorizontalOptions="End"
                                                     VerticalOptions="Center"
                                                     Grid.Column="1" />
@@ -178,4 +171,4 @@
         <views:TimerView x:Name="TimerViewControl" IsVisible="False" />
 
     </Grid>
-</local:BasicSoundPage>
+</ContentPage>

@@ -1,17 +1,31 @@
 using Plugin.Maui.Audio;
+using CalmSpace.ViewModels;
+using Microsoft.Maui.Controls;
+using System.Diagnostics;
 
 namespace CalmSpace.Pages.WinterPage
 {
-    public partial class WinterPage : BasicSoundPage
+    public partial class WinterPage : ContentPage
     {
-        public WinterPage(IAudioManager audioManager) : base(audioManager)
+        private readonly BaseSoundViewModel _viewModel;
+
+        public WinterPage(IAudioManager audioManager)
         {
             InitializeComponent();
+            _viewModel = new BaseSoundViewModel(audioManager);
+            this.BindingContext = _viewModel;
             SetPlayPauseButton(this.FindByName<Button>("PlayPauseButton"));
             LoadSounds();
+            Debug.WriteLine("BindingContext set to ViewModel");
         }
 
-        protected override async void LoadSounds()
+        private void SetPlayPauseButton(Button button)
+        {
+            _viewModel.SetPlayPauseButton(button);
+            Debug.WriteLine("PlayPauseButton set successfully.");
+        }
+
+        private async void LoadSounds()
         {
             var winterSoundMappings = new Dictionary<string, string>
             {
@@ -24,7 +38,7 @@ namespace CalmSpace.Pages.WinterPage
 
             await Task.Run(async () =>
             {
-                await _soundManager.LoadSoundsAsync("Winter", winterSoundMappings);
+                await _viewModel.SoundManager.LoadSoundsAsync("Winter", winterSoundMappings);
             });
         }
     }

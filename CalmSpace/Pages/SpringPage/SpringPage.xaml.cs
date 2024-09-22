@@ -1,20 +1,31 @@
 using Plugin.Maui.Audio;
+using CalmSpace.ViewModels;
+using Microsoft.Maui.Controls;
 
 namespace CalmSpace.Pages.SpringPage
 {
-    public partial class SpringPage : BasicSoundPage
+    public partial class SpringPage : ContentPage
     {
-        public SpringPage(IAudioManager audioManager) : base(audioManager)
+        private readonly BaseSoundViewModel _viewModel;
+
+        public SpringPage(IAudioManager audioManager)
         {
             InitializeComponent();
+            _viewModel = new BaseSoundViewModel(audioManager);
+            this.BindingContext = _viewModel;
             SetPlayPauseButton(this.FindByName<Button>("PlayPauseButton"));
             LoadSounds();
         }
 
-        protected override async void LoadSounds()
+        private void SetPlayPauseButton(Button button)
+        {
+            _viewModel.SetPlayPauseButton(button);
+        }
+
+        private async void LoadSounds()
         {
             var springSoundMappings = new Dictionary<string, string>
-               {
+            {
                 { "midnight_rainfall.mp3", "Midnight Rainfall" },
                 { "tranquil_stream.mp3", "Tranquil Stream" },
                 { "gentle_creek_splash.mp3", "Gentle Creek Splash" },
@@ -24,7 +35,7 @@ namespace CalmSpace.Pages.SpringPage
 
             await Task.Run(async () =>
             {
-                await _soundManager.LoadSoundsAsync("Spring", springSoundMappings);
+                await _viewModel.SoundManager.LoadSoundsAsync("Spring", springSoundMappings);
             });
         }
     }

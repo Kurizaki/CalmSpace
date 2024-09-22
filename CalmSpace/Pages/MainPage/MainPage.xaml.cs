@@ -1,5 +1,5 @@
 ﻿using CalmSpace.Views;
-using CalmSpace.Helpers;
+using CalmSpace.Models;
 using Microsoft.Maui.Controls;
 
 namespace CalmSpace.Pages.MainPage

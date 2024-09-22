@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Timers;
 
-namespace CalmSpace.Helpers
+namespace CalmSpace.Models
 {
     public class TimerManager
     {

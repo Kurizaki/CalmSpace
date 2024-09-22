@@ -1,20 +1,31 @@
 using Plugin.Maui.Audio;
+using CalmSpace.ViewModels;
+using Microsoft.Maui.Controls;
 
 namespace CalmSpace.Pages.AutumnPage
 {
-    public partial class AutumnPage : BasicSoundPage
+    public partial class AutumnPage : ContentPage
     {
-        public AutumnPage(IAudioManager audioManager) : base(audioManager)
+        private readonly BaseSoundViewModel _viewModel;
+
+        public AutumnPage(IAudioManager audioManager)
         {
             InitializeComponent();
+            _viewModel = new BaseSoundViewModel(audioManager);
+            this.BindingContext = _viewModel;
             SetPlayPauseButton(this.FindByName<Button>("PlayPauseButton"));
             LoadSounds();
         }
 
-        protected override async void LoadSounds()
+        private void SetPlayPauseButton(Button button)
+        {
+            _viewModel.SetPlayPauseButton(button);
+        }
+
+        private async void LoadSounds()
         {
             var autumnSoundMappings = new Dictionary<string, string>
-               {
+            {
                 { "riverbank_morning.mp3", "Riverbank Morning" },
                 { "hurricanes_edge.mp3", "Hurricane’s Edge" },
                 { "thunderous_rainstorm.mp3", "Thunderous Rainstorm" },
@@ -24,7 +35,7 @@ namespace CalmSpace.Pages.AutumnPage
 
             await Task.Run(async () =>
             {
-                await _soundManager.LoadSoundsAsync("Autumn", autumnSoundMappings);
+                await _viewModel.SoundManager.LoadSoundsAsync("autumn", autumnSoundMappings);
             });
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using Microsoft.Maui.Storage;
 
-namespace CalmSpace.Helpers
+namespace CalmSpace.Models
 {
     public class FavoriteManager
     {

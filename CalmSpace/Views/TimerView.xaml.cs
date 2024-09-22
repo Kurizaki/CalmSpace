@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
-using CalmSpace.Helpers;
+using CalmSpace.Models;
 
 namespace CalmSpace.Views
 {

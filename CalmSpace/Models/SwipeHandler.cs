@@ -1,6 +1,6 @@
 ﻿using Microsoft.Maui.Controls;
 
-namespace CalmSpace.Helpers
+namespace CalmSpace.Models
 {
     public static class SwipeHandler
     {
