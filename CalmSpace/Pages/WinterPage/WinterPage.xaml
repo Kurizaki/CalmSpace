@@ -141,18 +141,19 @@
                                            HasShadow="True">
                                         <Grid>
                                             <Button Text="{Binding SoundName}"
-                                                    FontSize="16"
-                                                    TextColor="Black"
-                                                    BackgroundColor="Transparent"
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BaseSoundViewModel}}, Path=PlayPauseCommand}"
-                                                    HorizontalOptions="StartAndExpand"
-                                                    VerticalOptions="Center" />
+                                                FontSize="16"
+                                                TextColor="Black"
+                                                BackgroundColor="Transparent"
+                                                Command="{Binding Path=BindingContext.PlaySpecificSoundCommand, Source={x:Reference WinterPage}}"
+                                                CommandParameter="{Binding SoundFilePath}"
+                                                HorizontalOptions="StartAndExpand"
+                                                VerticalOptions="Center" />
 
-                                            <Button ImageSource="Icons/MainPage/favourite_icon.svg"
+                                                <Button ImageSource="Icons/MainPage/favourite_icon.svg"
                                                     BackgroundColor="Transparent"
                                                     WidthRequest="40"
                                                     HeightRequest="40"
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BaseSoundViewModel}}, Path=FavoriteCommand}"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentView}}, Path=BindingContext.FavoriteCommand}"
                                                     HorizontalOptions="End"
                                                     VerticalOptions="Center"
                                                     Grid.Column="1" />
